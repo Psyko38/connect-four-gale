@@ -1,0 +1,97 @@
+@import url(https://fonts.googleapis.com/css?family=Space+Grotesk:300,regular,500,600,700);
+:root {
+	--Dark-Purple: #5c2dd5;
+	--White: #ffffff;
+	--Black: #000000;
+}
+
+body {
+	background-color: #7945ff;
+	padding: 30px;
+	height: 100vh;
+}
+
+nav {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+nav > button {
+	background-color: var(--Dark-Purple);
+	color: var(--White);
+	border: 0;
+	padding: 5px 10px 5px 10px;
+	border-radius: 666px;
+	font-family: Space Grotesk;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 20.42px;
+	letter-spacing: 0px;
+	text-align: center;
+}
+
+.Game {
+	display: grid;
+	grid-template-columns: 1fr 1.5fr 1fr;
+	grid-template-rows: 1fr;
+}
+
+.Game > div {
+	padding: 45% 30% 45% 30%;
+}
+
+.Game > div > div {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
+	height: 100%;
+	width: 100%;
+	background-color: var(--White);
+	border: var(--Black) 5px solid;
+	box-shadow: 0px 10px 0px 0px var(--Black);
+	border-radius: 20px;
+	border-width: 3px;
+}
+
+.Game > div > div > p:first-child {
+	font-family: Space Grotesk;
+	font-weight: 700;
+	font-size: 20px;
+	line-height: 25.52px;
+	letter-spacing: 0px;
+}
+
+.Game > div > div > p:last-child {
+	font-family: Space Grotesk;
+	font-weight: 700;
+	font-size: 56px;
+	line-height: 71.46px;
+	letter-spacing: 0px;
+}
+
+.Game > div > div {
+	height: 100%;
+}
+
+.Game > div > div > img {
+	transform: translateY(-35px);
+}
+
+.Game > img {
+	background-image: url(../assets/GameLayer2.svg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	border-radius: 40px;
+	box-shadow: 0px 10px 0px 0px #000000;
+}
+
+main {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
