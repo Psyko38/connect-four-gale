@@ -17,11 +17,12 @@ html {
    ========================================================================== */
 
 /**
- * Remove the margin in all browsers.
+ * Remove the margin and padding in all browsers.
  */
 
 body {
 	margin: 0;
+	padding: 0;
 }
 
 /**

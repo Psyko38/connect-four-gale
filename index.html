@@ -16,25 +16,89 @@
 			<button>RESTART</button>
 		</nav>
 		<main>
-            
-			<div class="Game">
-				<div>
-					<div>
-						<img src="assets/player-one.svg" alt="player one" />
-						<p>PLAYER 1</p>
-						<p aria-live="polite">12</p>
+			<div class="game">
+				<div class="player">
+					<img src="assets/player-one.svg" alt="" />
+					<p class="hs">PLAYER 1</p>
+					<p class="hl" aria-live="polite">12</p>
+				</div>
+				<div class="gamehud">
+					<div class="arrow">
+						<button aria-live="polite">
+							<img src="assets/Id.svg" alt="ID" />
+						</button>
+						<button aria-live="polite"></button>
+						<button aria-live="polite"></button>
+						<button aria-live="polite"></button>
+						<button aria-live="polite"></button>
+						<button aria-live="polite"></button>
+						<button aria-live="polite"></button>
+					</div>
+					<div class="gride">
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
 					</div>
 				</div>
-				<img src="assets/GameLayer.svg" alt="Game Layer" />
-				<div>
-					<div>
-						<img src="assets/player-two.svg" alt="player two" />
-						<p>PLAYER 2</p>
-						<p aria-live="polite">23</p>
-					</div>
+
+				<div class="player">
+					<img src="assets/player-two.svg" alt="" />
+					<p class="hs">PLAYER 2</p>
+					<p class="hl" aria-live="polite">23</p>
 				</div>
 			</div>
 		</main>
+		<div class="info">
+			<div>
+				<p class="hxs" aria-live="polite">PLAYER 2’S TURN</p>
+				<p class="hl" aria-live="polite">14s</p>
+			</div>
+			<div>
+				<p class="hxl">PLAYER 1</p>
+				<p class="hl">WINS</p>
+				<button class="hxs">PLAY AGAIN</button>
+			</div>
+		</div>
+		<div class="bg"></div>
 	</body>
 	<script src="app.js"></script>
 </html>

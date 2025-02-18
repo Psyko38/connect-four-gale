@@ -3,12 +3,47 @@
 	--Dark-Purple: #5c2dd5;
 	--White: #ffffff;
 	--Black: #000000;
+	--Red: #fd6687;
+	--Yellow: #ffce67;
+}
+* {
+	padding: 0;
+	margin: 0;
+}
+
+html {
+	padding: 0;
+	margin: 0;
 }
 
 body {
 	background-color: #7945ff;
-	padding: 30px;
 	height: 100vh;
+	position: relative;
+}
+
+.hl {
+	font-family: Space Grotesk;
+	font-weight: 700;
+	font-size: 56px;
+	line-height: 71.46px;
+	letter-spacing: 0px;
+}
+
+.hs {
+	font-family: Space Grotesk;
+	font-weight: 700;
+	font-size: 20px;
+	line-height: 25.52px;
+	letter-spacing: 0px;
+}
+
+.hxs {
+	font-family: Space Grotesk;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 20.42px;
+	letter-spacing: 0px;
 }
 
 nav {
@@ -32,66 +67,145 @@ nav > button {
 	text-align: center;
 }
 
-.Game {
-	display: grid;
-	grid-template-columns: 1fr 1.5fr 1fr;
-	grid-template-rows: 1fr;
+.game {
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
 }
 
-.Game > div {
-	padding: 45% 30% 45% 30%;
-}
-
-.Game > div > div {
-	position: relative;
+.player {
+	background-color: var(--White);
+	border: 3px solid #000000;
+	box-shadow: 0px 10px 0px 0px #000000;
+	border-radius: 20px;
+	height: 25vmin;
+	width: 20vmin;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: space-evenly;
-	height: 100%;
-	width: 100%;
+}
+
+.player > img {
+	transform: translateY(-30px);
+}
+
+.gride > div {
+	height: 70%;
+	width: 83%;
+	background-color: #7945ff;
+	border: 3px solid #000000;
+	box-shadow: 0px -5px 0px 0px #000000;
+	border-radius: 400px;
+}
+
+.gride {
+	padding: 15px;
+	margin: 0;
+	height: 500px;
+	width: 500px;
 	background-color: var(--White);
-	border: var(--Black) 5px solid;
-	box-shadow: 0px 10px 0px 0px var(--Black);
-	border-radius: 20px;
-	border-width: 3px;
-}
-
-.Game > div > div > p:first-child {
-	font-family: Space Grotesk;
-	font-weight: 700;
-	font-size: 20px;
-	line-height: 25.52px;
-	letter-spacing: 0px;
-}
-
-.Game > div > div > p:last-child {
-	font-family: Space Grotesk;
-	font-weight: 700;
-	font-size: 56px;
-	line-height: 71.46px;
-	letter-spacing: 0px;
-}
-
-.Game > div > div {
-	height: 100%;
-}
-
-.Game > div > div > img {
-	transform: translateY(-35px);
-}
-
-.Game > img {
-	background-image: url(../assets/GameLayer2.svg);
-	background-repeat: no-repeat;
-	background-size: cover;
-	border-radius: 40px;
+	border: 3px solid #000000;
 	box-shadow: 0px 10px 0px 0px #000000;
+	border-radius: 40px;
+	display: grid;
+	justify-items: center;
+	align-items: center;
+	grid-template-columns: repeat(7, 1fr);
+	grid-template-rows: repeat(6, 1fr);
 }
 
-main {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
+.arrow {
+	padding: 0 15px;
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	justify-items: center;
 	align-items: center;
+}
+
+.arrow > button {
+	background-color: transparent;
+	border: 0;
+}
+
+.bg {
+	position: absolute;
+	bottom: 0;
+	z-index: -1;
+	background-color: var(--Dark-Purple);
+	width: 100vw;
+	height: 20vmin;
+	border-radius: 60px 60px 0 0;
+}
+
+/* .info {
+	position: relative;
+	width: 100%;
+	height: 22vmin;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+} */
+
+.info {
+	position: relative;
+	bottom: 5%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.info > div:first-child {
+	display: none;
+}
+
+.info > div:last-child {
+	background-color: var(--White);
+	border: ;
+}
+
+/* .info > div:first-child {
+	height: 100%;
+	width: 22vmin;
+	background-image: url(../assets/BG.svg);
+	background-size: contain;
+	background-repeat: no-repeat;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+} */
+
+.gride > div:nth-child(13),
+.gride > div:nth-child(20),
+.gride > div:nth-child(27),
+.gride > div:nth-child(32),
+.gride > div:nth-child(34),
+.gride > div:nth-child(38) {
+	background-color: var(--Yellow);
+}
+
+.gride > div:nth-child(26),
+.gride > div:nth-child(33),
+.gride > div:nth-child(37),
+.gride > div:nth-child(39),
+.gride > div:nth-child(40),
+.gride > div:nth-child(41) {
+	background-color: var(--Red);
+}
+
+.gride > div:nth-child(34)::after,
+.gride > div:nth-child(27)::after,
+.gride > div:nth-child(20)::after,
+.gride > div:nth-child(13)::after {
+	content: "";
+	height: 30px;
+	width: 30px;
+	border-radius: 666px;
+	border: var(--White) 5px solid;
+	display: block;
+	transform: translate(10px, 8px);
 }

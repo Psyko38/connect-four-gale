@@ -5,10 +5,9 @@
 	box-sizing: border-box;
 }
 
-/* 2. Remove default margin and padding */
+/* 2. Remove default margin */
 * {
 	margin: 0;
-	padding: 0;
 }
 
 body {
