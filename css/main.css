@@ -1,6 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Space+Grotesk:300,regular,500,600,700);
 :root {
 	--Dark-Purple: #5c2dd5;
+	--Purple: #7945ff;
 	--White: #ffffff;
 	--Black: #000000;
 	--Red: #fd6687;
@@ -43,6 +44,14 @@ body {
 	font-weight: 700;
 	font-size: 16px;
 	line-height: 20.42px;
+	letter-spacing: 0px;
+}
+
+.hm {
+	font-family: Space Grotesk;
+	font-weight: 700;
+	font-size: 24px;
+	line-height: 30.62px;
 	letter-spacing: 0px;
 }
 
@@ -139,7 +148,7 @@ nav > button {
 	border-radius: 60px 60px 0 0;
 }
 
-/* .info {
+.info {
 	position: relative;
 	width: 100%;
 	height: 22vmin;
@@ -147,7 +156,7 @@ nav > button {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-} */
+}
 
 .info {
 	position: relative;
@@ -158,16 +167,30 @@ nav > button {
 	justify-content: center;
 }
 
-.info > div:first-child {
-	display: none;
-}
-
 .info > div:last-child {
+	padding: 5px 35px 5px 35px;
 	background-color: var(--White);
-	border: ;
+	border-radius: 20px;
+	border: 3px solid #000000;
+	box-shadow: 0px 10px 0px 0px #000000;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
-/* .info > div:first-child {
+.info > div:last-child > button {
+	color: white;
+	background: var(--Dark-Purple);
+	border-radius: 666px;
+	border: 0;
+	padding: 10px;
+}
+
+.info > div:last-child > button:hover {
+	background: var(--Red);
+}
+
+.info > div:first-child {
 	height: 100%;
 	width: 22vmin;
 	background-image: url(../assets/BG.svg);
@@ -177,7 +200,7 @@ nav > button {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-} */
+}
 
 .gride > div:nth-child(13),
 .gride > div:nth-child(20),
@@ -208,4 +231,203 @@ nav > button {
 	border: var(--White) 5px solid;
 	display: block;
 	transform: translate(10px, 8px);
+}
+
+.info > div:first-child {
+	display: none;
+}
+
+.pupup {
+	position: absolute;
+	z-index: 666;
+	top: 0;
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+}
+
+.rules {
+	position: relative;
+	height: 73vmin;
+	width: 50vmin;
+	border-radius: 40px;
+	border: 3px solid #000000;
+	box-shadow: 0px 10px 0px 0px #000000;
+}
+
+.rules > h1 {
+	text-align: center;
+}
+
+.rules > button {
+	position: absolute;
+	bottom: -5vmin;
+	right: 40%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: var(--Red);
+	border: 3px solid #000000;
+	box-shadow: 0px 5px 0px 0px #000000;
+	border-radius: 666px;
+	height: 10vmin;
+	width: 10vmin;
+}
+
+.rules > button:hover {
+	border: 3px solid #5c2dd5;
+	box-shadow: 0px 5px 0px 0px #5c2dd5;
+}
+
+.rules h2 {
+	color: var(--Dark-Purple);
+}
+
+.rules > div {
+	padding: 15px;
+}
+
+.rules p,
+.rules li {
+	font-family: Space Grotesk;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 20.42px;
+	letter-spacing: 0px;
+}
+
+ol {
+	counter-reset: item;
+	margin-left: 0;
+	padding-left: 0;
+}
+li {
+	display: block;
+	margin-bottom: 0.5em;
+	margin-left: 2em;
+}
+li::before {
+	display: inline-block;
+	content: counter(item) " ";
+	counter-increment: item;
+	width: 2em;
+	margin-left: -2em;
+	color: var(--Black);
+	font-family: Space Grotesk;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 20.42px;
+	letter-spacing: 0px;
+}
+
+.pause {
+	background-color: var(--Purple);
+	border: 3px solid #000000;
+	box-shadow: 0px 10px 0px 0px #000000;
+	padding: 30px;
+	border-radius: 40px;
+	text-align: center;
+	width: 30%;
+}
+
+.pause > h2 {
+	color: var(--White);
+}
+
+.pause > .button {
+	display: flex;
+	flex-direction: column;
+}
+
+.pause button {
+	margin: 10px 0 10px 0;
+	padding: 15px 0 15px 0;
+	border-radius: 20px;
+	width: 100%;
+}
+
+.pause button:nth-child(1) {
+	border: 3px solid #5c2dd5;
+	box-shadow: 0px 10px 0px 0px #5c2dd5;
+}
+
+.pause button:nth-child(2) {
+	border: 3px solid #000000;
+	box-shadow: 0px 10px 0px 0px #000000;
+}
+
+.pause button:nth-child(3) {
+	background: #fd6687;
+	border: 3px solid #5c2dd5;
+	box-shadow: 0px 10px 0px 0px #5c2dd5;
+}
+
+.GameMenu {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr 1fr;
+	justify-items: center;
+	align-items: center;
+	background: var(--Purple);
+	border: 3px solid #000000;
+	box-shadow: 0px 10px 0px 0px #000000;
+	border-radius: 40px;
+	height: 50%;
+	width: 30%;
+	padding: 15px;
+	position: relative;
+}
+
+.GameMenu > .button {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	padding: 0 30px 0 30px;
+}
+
+.GameMenu > .button > button {
+	padding: 15px;
+	height: 10vmin;
+	margin: 10px 0 10px 0;
+	border-radius: 20px;
+}
+
+.GameMenu > .button > button:first-child {
+	background-color: var(--Yellow);
+	border: 3px solid #5c2dd5;
+	box-shadow: 0px 10px 0px 0px #5c2dd5;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.GameMenu > .button > button:last-child {
+	background-color: var(--White);
+	border: 3px solid #5c2dd5;
+	box-shadow: 0px 10px 0px 0px #5c2dd5;
+}
+
+.GameMenu button {
+	width: 100%;
+}
+
+/* centre de controle des HUD ###################################################  */
+.pupup {
+	background-color: var(--Dark-Purple);
+	display: flex;
+}
+
+.rules {
+	display: none;
+}
+
+.pause {
+	display: none;
+}
+
+.GameMenu {
+	display: grid;
 }
