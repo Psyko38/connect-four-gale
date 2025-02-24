@@ -144,7 +144,7 @@ nav > button {
 	z-index: -1;
 	background-color: var(--Dark-Purple);
 	width: 100vw;
-	height: 20vmin;
+	height: 35%;
 	border-radius: 60px 60px 0 0;
 }
 
@@ -165,6 +165,10 @@ nav > button {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+}
+
+.info > div{
+	color: var(--White);
 }
 
 .info > div:last-child {
@@ -200,41 +204,6 @@ nav > button {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-}
-
-.gride > div:nth-child(13),
-.gride > div:nth-child(20),
-.gride > div:nth-child(27),
-.gride > div:nth-child(32),
-.gride > div:nth-child(34),
-.gride > div:nth-child(38) {
-	background-color: var(--Yellow);
-}
-
-.gride > div:nth-child(26),
-.gride > div:nth-child(33),
-.gride > div:nth-child(37),
-.gride > div:nth-child(39),
-.gride > div:nth-child(40),
-.gride > div:nth-child(41) {
-	background-color: var(--Red);
-}
-
-.gride > div:nth-child(34)::after,
-.gride > div:nth-child(27)::after,
-.gride > div:nth-child(20)::after,
-.gride > div:nth-child(13)::after {
-	content: "";
-	height: 30px;
-	width: 30px;
-	border-radius: 666px;
-	border: var(--White) 5px solid;
-	display: block;
-	transform: translate(10px, 8px);
-}
-
-.info > div:first-child {
-	display: none;
 }
 
 .pupup {
@@ -431,3 +400,29 @@ li::before {
 .GameMenu {
 	display: grid;
 }
+
+.info > div:first-child {
+	display: flex;
+}
+
+.info > div:last-child {
+	display: none;
+}
+
+
+/*
+
+
+.gride > div:nth-child(34)::after,
+.gride > div:nth-child(27)::after,
+.gride > div:nth-child(20)::after,
+.gride > div:nth-child(13)::after {
+	content: "";
+	height: 30px;
+	width: 30px;
+	border-radius: 666px;
+	border: var(--White) 5px solid;
+	display: block;
+	transform: translate(10px, 8px);
+} 
+*/
