@@ -11,6 +11,12 @@ const grideDiv = document.querySelectorAll(".gride > div");
 const TimerScreen = document.querySelector(
   ".info > div:nth-child(1) > p:nth-child(2)"
 );
+const GameHUD = document.querySelectorAll(".gamehud > .arrow > button");
+const GameTurnUI = document.querySelector(".info > div:first-child");
+const GameTurnText = document.querySelector(
+  ".info > div:first-child > p:first-child"
+);
+const UIinfoGame = document.querySelector(".info");
 
 /* Variables du jeu */
 let ScoreJ1 = 0;
@@ -24,6 +30,7 @@ let GrideGameDiv = [];
 let GrideGameGrid = [];
 
 /* Initialisation */
+startGame();
 setupGride();
 
 /* Écouteurs d’événements */
@@ -33,6 +40,32 @@ GameRulesBTN.addEventListener("click", () => {
 
 navMenu.addEventListener("click", () => {
   CreatPauseUIAndShowPauseUI();
+});
+
+/* Écouteur d’événements pour les touches du clavier */
+document.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowRight") {
+    if (Colum < 5) {
+      Colum++;
+      MoveArrow(Colum);
+    }
+  } else if (e.key === "ArrowLeft") {
+    if (Colum > 0) {
+      Colum--;
+      MoveArrow(Colum);
+    }
+  } else if (e.key === " ") {
+    let moveSuccessful = false;
+    if (Turn === 0) {
+      moveSuccessful = AddCircele(Colum, "r");
+    } else {
+      moveSuccessful = AddCircele(Colum, "y");
+    }
+    if (moveSuccessful) {
+      nextTurn(); // Appel à nextTurn()
+      checkWinner(GrideGameGrid);
+    }
+  }
 });
 
 /* --- Déclaration des fonctions --- */
@@ -192,9 +225,12 @@ function checkWinner(grid) {
       for (let h = 0; h < gridhup; h++) {
         let target = grid[i][h];
         if (target !== "") {
+          let WiniD = [];
+          WiniD.push([i, h]);
           for (let j = 1; j < 4; j++) {
             let I = i + j * d1;
             let H = h + j * d2;
+            WiniD.push([I, H]);
             if (I < 0 || I >= gridLength || H < 0 || H >= gridhup) {
               break;
             }
@@ -202,7 +238,7 @@ function checkWinner(grid) {
               break;
             }
             if (j === 3) {
-              return target;
+              ShowWinner(WiniD);
             }
           }
         }
@@ -211,8 +247,19 @@ function checkWinner(grid) {
   }
 }
 
+function ShowWinner(list) {
+  for (let i = 0; i < list.length; i++) {
+    let x = list[i][0];
+    let y = list[i][1];
+    GrideGameDiv[x][y].classList.add("winner");
+  }
+  stopGame();
+}
+
 /* Démarrage du jeu */
 function startGame() {
+  GameTurnUI.style.backgroundImage = "url(assets/Player1-1.svg)";
+  GameTurnText.innerHTML = "PLAYER 1’S TURN";
   ScoreJ1 = 0;
   ScoreJ2 = 0;
   Colum = 0;
@@ -225,23 +272,41 @@ function startGame() {
 
 /* Gestion du temps */
 function Timers(time) {
-  TimerCounter = 15;
+  if (TimerInterval) {
+    clearInterval(TimerInterval);
+  }
+  TimerCounter = time;
   TimerScreen.innerHTML = TimerCounter + "s";
   TimerInterval = setInterval(() => {
     TimerCounter--;
     if (TimerCounter === 0) {
       clearInterval(TimerInterval);
+      placeRandomPiece();
     }
     TimerScreen.innerHTML = TimerCounter + "s";
   }, 1000);
 }
 
+function placeRandomPiece() {
+  let randomColumn;
+  let moveSuccessful = false;
+
+  for (let i = 0; i < 6; i++) {
+    randomColumn = Math.floor(Math.random() * 6);
+    if (Turn === 0) {
+      moveSuccessful = AddCircele(randomColumn, "r");
+    } else {
+      moveSuccessful = AddCircele(randomColumn, "y");
+    }
+    if (moveSuccessful) {
+      break;
+    }
+  }
+  nextTurn();
+  checkWinner(GrideGameGrid);
+}
+
 /* Imprime les coups sur la grid de div */
-GrideGameGrid[0][3] = "r";
-GrideGameGrid[0][4] = "r";
-GrideGameGrid[0][5] = "y";
-GrideGameGrid[0][6] = "r";
-PrintGride();
 function PrintGride() {
   for (let i = 0; i < GrideGameGrid.length; i++) {
     for (let y = 0; y < 7; y++) {
@@ -251,9 +316,88 @@ function PrintGride() {
         } else if (GrideGameGrid[i][y] == "y") {
           GrideGameDiv[i][y].style.backgroundColor = "var(--Yellow)";
         } else {
-		  GrideGameDiv[i][y].style.backgroundColor = "var(--Purple)";
-		}
+          GrideGameDiv[i][y].style.backgroundColor = "var(--Purple)";
+        }
       }
     }
   }
+}
+
+/* Ajoute les pions au bonne endroit */
+function AddCircele(List, Player) {
+  let a = 0;
+  let place = false;
+  for (let i = 0; i < GrideGameGrid[List].length + 1; i++) {
+    a = GrideGameGrid[List].length - i;
+    if (GrideGameGrid[List][a] == "") {
+      GrideGameGrid[List][a] = Player;
+      PrintGride();
+      Colum = 0;
+      MoveArrow(Colum);
+      place = true;
+      break;
+    }
+  }
+  return place;
+}
+
+function MoveArrow(Line) {
+  for (let i = 0; i < GameHUD.length; i++) {
+    GameHUD[i].innerHTML = "";
+  }
+  if (Turn == 0) {
+    GameHUD[Line].innerHTML = `<img src="assets/Player1.svg" alt="Box ${
+      Line + 1
+    }" />`;
+  } else {
+    GameHUD[Line].innerHTML = `<img src="assets/Player2.svg" alt="Box ${
+      Line + 1
+    }" />`;
+  }
+}
+
+function nextTurn() {
+  if (Turn === 0) {
+    Turn = 1;
+    GameTurnUI.style.backgroundImage = "url(assets/Player2-1.svg)";
+    GameTurnText.innerHTML = "PLAYER 2’S TURN";
+  } else {
+    Turn = 0;
+    GameTurnUI.style.backgroundImage = "url(assets/Player1-1.svg)";
+    GameTurnText.innerHTML = "PLAYER 1’S TURN";
+  }
+  Timers(15);
+  MoveArrow(Colum); // Mettre à jour la couleur de GameHUD
+}
+
+function stopGame() {
+  clearInterval(TimerInterval);
+}
+
+function createVictoryBanner(PlayerName) {
+  GameTurnUI.display = "none";
+  const Maindiv = createlement(
+    "div",
+    { class: "victory-banner" },
+    "",
+    UIinfoGame
+  );
+  if (PlayerName === "r") {
+    createlement("p", { class: "hl" }, `PLAYER 1 wins!`, Maindiv);
+  } else if (PlayerName === "y") {
+    createlement("p", { class: "hl" }, `PLAYER 2 wins!`, Maindiv);
+  }
+  createlement("h2", { class: "hxs" }, "WINS", Maindiv);
+
+  const playAgainButton = createlement(
+    "button",
+    { class: "hxs" },
+    "PLAY AGAIN",
+    Maindiv
+  );
+
+  playAgainButton.addEventListener("click", () => {
+    startGame();
+    Maindiv.remove();
+  });
 }

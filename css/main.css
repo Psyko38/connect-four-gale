@@ -127,8 +127,9 @@ nav > button {
 
 .arrow {
 	padding: 0 15px;
+	width: 100%;
 	display: grid;
-	grid-template-columns: repeat(7, 1fr);
+	grid-template-columns: repeat(6, 1fr);
 	justify-items: center;
 	align-items: center;
 }
@@ -136,6 +137,8 @@ nav > button {
 .arrow > button {
 	background-color: transparent;
 	border: 0;
+	padding: 0 15px;
+	border: 5px solid transparent;
 }
 
 .bg {
@@ -197,7 +200,6 @@ nav > button {
 .info > div:first-child {
 	height: 100%;
 	width: 22vmin;
-	background-image: url(../assets/BG.svg);
 	background-size: contain;
 	background-repeat: no-repeat;
 	display: flex;
@@ -409,14 +411,7 @@ li::before {
 	display: none;
 }
 
-
-/*
-
-
-.gride > div:nth-child(34)::after,
-.gride > div:nth-child(27)::after,
-.gride > div:nth-child(20)::after,
-.gride > div:nth-child(13)::after {
+.winner::after {
 	content: "";
 	height: 30px;
 	width: 30px;
@@ -424,5 +419,4 @@ li::before {
 	border: var(--White) 5px solid;
 	display: block;
 	transform: translate(10px, 8px);
-} 
-*/
+}

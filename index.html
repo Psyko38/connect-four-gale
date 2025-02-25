@@ -1,120 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
 
-		<link rel="stylesheet" href="css/normalize.css" />
-		<link rel="stylesheet" href="css/reset.css" />
-		<link rel="stylesheet" href="css/main.css" />
-	</head>
-	<body>
-		<nav>
-			<button>MENU</button>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Document</title>
+
+	<link rel="stylesheet" href="css/normalize.css" />
+	<link rel="stylesheet" href="css/reset.css" />
+	<link rel="stylesheet" href="css/main.css" />
+</head>
+
+<body>
+	<nav>
+		<button>MENU</button>
+		<img src="assets/Ico.svg" alt="Ico" />
+		<button>RESTART</button>
+	</nav>
+	<main>
+		<div class="game">
+			<div class="player">
+				<img src="assets/player-one.svg" alt="" />
+				<p class="hs">PLAYER 1</p>
+				<p class="hl" aria-live="polite">12</p>
+			</div>
+			<div class="gamehud">
+				<div class="arrow">
+					<button aria-live="polite"></button>
+					<button aria-live="polite"></button>
+					<button aria-live="polite"></button>
+					<button aria-live="polite"></button>
+					<button aria-live="polite"></button>
+					<button aria-live="polite"></button>
+				</div>
+				<div class="gride">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+				</div>
+			</div>
+
+			<div class="player">
+				<img src="assets/player-two.svg" alt="" />
+				<p class="hs">PLAYER 2</p>
+				<p class="hl" aria-live="polite">23</p>
+			</div>
+		</div>
+	</main>
+	<div class="pupup" id="pupup">
+		<dialog open class="GameMenu" id="GameMenu">
 			<img src="assets/Ico.svg" alt="Ico" />
-			<button>RESTART</button>
-		</nav>
-		<main>
-			<div class="game">
-				<div class="player">
-					<img src="assets/player-one.svg" alt="" />
-					<p class="hs">PLAYER 1</p>
-					<p class="hl" aria-live="polite">12</p>
-				</div>
-				<div class="gamehud">
-					<div class="arrow">
-						<button aria-live="polite">
-							<img src="assets/Id.svg" alt="ID" />
-						</button>
-						<button aria-live="polite"></button>
-						<button aria-live="polite"></button>
-						<button aria-live="polite"></button>
-						<button aria-live="polite"></button>
-						<button aria-live="polite"></button>
-						<button aria-live="polite"></button>
-					</div>
-					<div class="gride">
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-					</div>
-				</div>
+			<div class="button">
+				<button class="hm">
+					<p>PLAY VS PLAYER</p>
+					<img src="assets/player-vs-player.svg" alt="Player Vs Player ICO" />
+				</button>
+				<button class="hm">GAME RULES</button>
+			</div>
+		</dialog>
+	</div>
 
-				<div class="player">
-					<img src="assets/player-two.svg" alt="" />
-					<p class="hs">PLAYER 2</p>
-					<p class="hl" aria-live="polite">23</p>
-				</div>
-			</div>
-		</main>
-		<div class="pupup" id="pupup">
-			<dialog open class="GameMenu" id="GameMenu">
-				<img src="assets/Ico.svg" alt="Ico" />
-				<div class="button">
-					<button class="hm">
-						<p>PLAY VS PLAYER</p>
-						<img
-							src="assets/player-vs-player.svg"
-							alt="Player Vs Player ICO"
-						/>
-					</button>
-					<button class="hm">GAME RULES</button>
-				</div>
-			</dialog>
+	<div class="info">
+		<div>
+			<p class="hxs" aria-live="polite"></p>
+			<p class="hl" aria-live="polite">0s</p>
 		</div>
+		<div>
+			<p class="hxs">PLAYER 1</p>
+			<p class="hl">WINS</p>
+			<button class="hxs">PLAY AGAIN</button>
+		</div>
+	</div>
+	<div class="bg"></div>
+</body>
+<script src="app.js"></script>
 
-		<div class="info">
-			<div>
-				<p class="hxs" aria-live="polite">PLAYER 2’S TURN</p>
-				<p class="hl" aria-live="polite">14s</p>
-			</div>
-			<div>
-				<p class="hxs">PLAYER 1</p>
-				<p class="hl">WINS</p>
-				<button class="hxs">PLAY AGAIN</button>
-			</div>
-		</div>
-		<div class="bg"></div>
-	</body>
-	<script src="app.js"></script>
 </html>
