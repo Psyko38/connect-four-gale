@@ -6,27 +6,32 @@
 	--Black: #000000;
 	--Red: #fd6687;
 	--Yellow: #ffce67;
+
+
 }
 * {
 	padding: 0;
 	margin: 0;
+
 }
 
 html {
-	padding: 0;
 	margin: 0;
+	width: 100vw;
+	font-size: 2vh;
 }
 
 body {
 	background-color: #7945ff;
 	height: 100vh;
+	width: 100vw;
 	position: relative;
 }
 
 .hl {
 	font-family: Space Grotesk;
 	font-weight: 700;
-	font-size: 56px;
+	font-size: 3.5rem;
 	line-height: 71.46px;
 	letter-spacing: 0px;
 }
@@ -34,7 +39,7 @@ body {
 .hs {
 	font-family: Space Grotesk;
 	font-weight: 700;
-	font-size: 20px;
+	font-size: 1.25rem;
 	line-height: 25.52px;
 	letter-spacing: 0px;
 }
@@ -42,7 +47,7 @@ body {
 .hxs {
 	font-family: Space Grotesk;
 	font-weight: 700;
-	font-size: 16px;
+	font-size: 1rem;
 	line-height: 20.42px;
 	letter-spacing: 0px;
 }
@@ -50,12 +55,13 @@ body {
 .hm {
 	font-family: Space Grotesk;
 	font-weight: 700;
-	font-size: 24px;
+	font-size: 1.5rem;
 	line-height: 30.62px;
 	letter-spacing: 0px;
 }
 
 nav {
+	padding-top: 15px;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -70,7 +76,7 @@ nav > button {
 	border-radius: 666px;
 	font-family: Space Grotesk;
 	font-weight: 700;
-	font-size: 16px;
+	font-size: 1rem;
 	line-height: 20.42px;
 	letter-spacing: 0px;
 	text-align: center;
@@ -101,33 +107,44 @@ nav > button {
 }
 
 .gride > div {
-	height: 83%;
-	width: 80%;
+	height: 100%;
+	width: 89%;
 	background-color: #7945ff;
 	border: 3px solid #000000;
 	box-shadow: 0px -5px 0px 0px #000000;
 	border-radius: 666px;
+	display: flex;
+	align-items: center;
+    justify-content: center;
+
 }
 
 .gride {
 	padding: 15px;
 	margin: 0;
-	height: 500px;
-	width: 500px;
+	height: 60vh;
+	width: 60vh;
 	background-color: var(--White);
 	border: 3px solid #000000;
 	box-shadow: 0px 10px 0px 0px #000000;
 	border-radius: 40px;
 	display: grid;
+	gap: 10px;
 	justify-items: center;
 	align-items: center;
 	grid-template-columns: repeat(6, 1fr);
 	grid-template-rows: repeat(7, 1fr);
 }
 
+.gamehud{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
 .arrow {
 	padding: 0 15px;
-	width: 100%;
+	width: 60vh;
 	display: grid;
 	grid-template-columns: repeat(6, 1fr);
 	justify-items: center;
@@ -266,7 +283,7 @@ nav > button {
 .rules li {
 	font-family: Space Grotesk;
 	font-weight: 500;
-	font-size: 16px;
+	font-size: 1rem;
 	line-height: 20.42px;
 	letter-spacing: 0px;
 }
@@ -290,7 +307,7 @@ li::before {
 	color: var(--Black);
 	font-family: Space Grotesk;
 	font-weight: 700;
-	font-size: 16px;
+	font-size: 1rem;
 	line-height: 20.42px;
 	letter-spacing: 0px;
 }
@@ -412,10 +429,21 @@ li::before {
 
 .winner::after {
 	content: "";
-	height: 30px;
-	width: 30px;
+	height: 5vh;
+	width: 5vh;
+	border: var(--White) 1vh solid;
 	border-radius: 666px;
-	border: var(--White) 5px solid;
-	display: block;
-	transform: translate(10px, 8px);
+}
+
+@media screen and (max-width:1050px) {
+	.GameMenu{
+		width: 50%;
+	}
+}
+
+@media screen and (max-width:800px) {
+	html{
+		font-size: 1.5vh;
+	}
+
 }

@@ -23,6 +23,7 @@ const GamePlayer2Point = document.querySelector(
 );
 const RestartBTN = document.querySelector("nav > button:nth-child(3)");
 const JvJ = document.querySelector(".GameMenu > div > button:nth-child(1)");
+const Bg = document.querySelector(".bg");
 
 /* Variables du jeu */
 let CanPlay = 1;
@@ -46,7 +47,6 @@ navMenu.addEventListener("click", () => {
 });
 
 RestartBTN.addEventListener("click", () => {
-
   startGame();
   resetGame();
 });
@@ -153,6 +153,7 @@ function CreatRulesAndShowRules() {
 
 /* Création et affichage de l'UI de pause */
 function CreatPauseUIAndShowPauseUI() {
+  CanPlay = 0;
   GameMunuUI.style.display = "none";
   pupupUI.style.backgroundColor = "#00000080";
   pupupUI.style.display = "flex";
@@ -179,6 +180,7 @@ function CreatPauseUIAndShowPauseUI() {
 
   ReumeGame.addEventListener("click", () => {
     pupupUI.style.display = "none";
+    CanPlay = 1;
     MainDiv.remove();
   });
 
@@ -279,6 +281,11 @@ function ShowWinner(list) {
     GrideGameDiv[x][y].classList.add("winner");
   }
   PlayersName = GrideGameGrid[list[0][0]][list[0][1]];
+  if (PlayersName == "r") {
+    Bg.style.backgroundColor = "var(--Red)";
+  } else if (PlayersName == "y") {
+    Bg.style.backgroundColor = "var(--Yellow)";
+  }
   createVictoryBanner(PlayersName);
   stopGame();
 }
@@ -289,6 +296,7 @@ function startGame() {
     document.querySelector(".victory-banner").remove();
   }
   GameTurnUI.style.display = "flex";
+  Bg.style.backgroundColor = "var(--Dark-Purple)";
   CanPlay = 1;
   Turn = 1;
   nextTurn();
@@ -314,10 +322,12 @@ function Timers(time) {
   TimerCounter = time;
   TimerScreen.innerHTML = TimerCounter + "s";
   TimerInterval = setInterval(() => {
-    TimerCounter--;
-    if (TimerCounter === 0) {
-      clearInterval(TimerInterval);
-      placeRandomPiece();
+    if (CanPlay == 1) {
+      TimerCounter--;
+      if (TimerCounter === 0) {
+        clearInterval(TimerInterval);
+        placeRandomPiece();
+      }
     }
     TimerScreen.innerHTML = TimerCounter + "s";
   }, 1000);
@@ -379,9 +389,6 @@ function AddCircele(List, Player) {
 
 function MoveArrow(Line) {
   if (CanPlay === 1) {
-    for (let i = 0; i < GameHUD.length; i++) {
-      GameHUD[i].innerHTML = "";
-    }
     if (Turn == 0) {
       GameHUD[Line].innerHTML = `<img src="assets/Player1.svg" alt="Box ${
         Line + 1
@@ -390,6 +397,11 @@ function MoveArrow(Line) {
       GameHUD[Line].innerHTML = `<img src="assets/Player2.svg" alt="Box ${
         Line + 1
       }" />`;
+    }
+    for (let i = 0; i < GameHUD.length; i++) {
+      if (i !== Line) {
+        GameHUD[i].innerHTML = "";
+      }
     }
   }
 }
@@ -410,10 +422,10 @@ function nextTurn() {
 
 function stopGame() {
   CanPlay = 0;
-  if ((PlayersName = "r")) {
+  if (PlayersName == "r") {
     ScoreJ1++;
     GamePlayer1Point.innerHTML = ScoreJ1;
-  } else if ((PlayersName = "y")) {
+  } else if (PlayersName == "y") {
     ScoreJ2++;
     GamePlayer2Point.innerHTML = ScoreJ2;
   }
