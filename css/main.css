@@ -107,8 +107,8 @@ nav > button {
 }
 
 .gride > div {
-	height: 100%;
-	width: 89%;
+	height: 84%;
+	width: 100%;
 	background-color: #7945ff;
 	border: 3px solid #000000;
 	box-shadow: 0px -5px 0px 0px #000000;
@@ -132,8 +132,8 @@ nav > button {
 	gap: 10px;
 	justify-items: center;
 	align-items: center;
-	grid-template-columns: repeat(6, 1fr);
-	grid-template-rows: repeat(7, 1fr);
+	grid-template-columns: repeat(7, 1fr);
+	grid-template-rows: repeat(6, 1fr);
 }
 
 .gamehud{
@@ -146,7 +146,7 @@ nav > button {
 	padding: 0 15px;
 	width: 60vh;
 	display: grid;
-	grid-template-columns: repeat(6, 1fr);
+	grid-template-columns: repeat(7, 1fr);
 	justify-items: center;
 	align-items: center;
 }
@@ -389,7 +389,15 @@ li::before {
 	box-shadow: 0px 10px 0px 0px #5c2dd5;
 }
 
-.GameMenu > .button > button:first-child {
+.GameMenu > .button > button:nth-child(1) {
+	color: var(--White);
+	background-color: var(--Red);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.GameMenu > .button > button:nth-child(2) {
 	background-color: var(--Yellow);
 	display: flex;
 	justify-content: space-between;

@@ -22,7 +22,8 @@ const GamePlayer2Point = document.querySelector(
   ".game > div:nth-child(3) > p:last-child"
 );
 const RestartBTN = document.querySelector("nav > button:nth-child(3)");
-const JvJ = document.querySelector(".GameMenu > div > button:nth-child(1)");
+const JvJ = document.querySelector(".GameMenu > div > button:nth-child(2)");
+const JvC = document.querySelector(".GameMenu > div > button:nth-child(1)");
 const Bg = document.querySelector(".bg");
 
 /* Variables du jeu */
@@ -36,6 +37,7 @@ let TimerInterval;
 let PlayersName = "";
 let GrideGameDiv = [];
 let GrideGameGrid = [];
+let CPUmode = false;
 
 /* Écouteurs d’événements */
 GameRulesBTN.addEventListener("click", () => {
@@ -52,6 +54,15 @@ RestartBTN.addEventListener("click", () => {
 });
 
 JvJ.addEventListener("click", () => {
+  CPUmode = false;
+  pupupUI.style.display = "none";
+  GameMenuUI.style.display = "none";
+  startGame();
+  resetGame();
+});
+
+JvC.addEventListener("click", () => {
+  CPUmode = true;
   pupupUI.style.display = "none";
   GameMenuUI.style.display = "none";
   startGame();
@@ -61,7 +72,7 @@ JvJ.addEventListener("click", () => {
 /* Écouteur d’événements pour les touches du clavier */
 document.addEventListener("keydown", (e) => {
   if (e.key === "ArrowRight") {
-    if (Colum < 5) {
+    if (Colum < 6) {
       Colum++;
       MoveArrow(Colum);
     }
@@ -78,7 +89,13 @@ document.addEventListener("keydown", (e) => {
       moveSuccessful = AddCircele(Colum, "y");
     }
     if (moveSuccessful) {
-      nextTurn();
+      if (CPUmode == true) {
+        CPU();
+        Turn = 0;
+        Timers(15);
+      } else {
+        nextTurn();
+      }
       checkWinner(GrideGameGrid);
     }
   }
@@ -216,12 +233,12 @@ function setupGride() {
   GrideGameDiv = [];
   GrideGameGrid = [];
   let space = 0;
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 7; i++) {
     GrideGameDiv.push([]);
     GrideGameGrid.push([]);
   }
   for (let i = 0; i < 42; i++) {
-    if (space === 6) {
+    if (space === 7) {
       space = 0;
     }
     GrideGameGrid[space].push("");
@@ -339,10 +356,14 @@ function placeRandomPiece() {
 
   for (let i = 0; i < 6; i++) {
     randomColumn = Math.floor(Math.random() * 6);
-    if (Turn === 0) {
+    if (CPUmode == true) {
       moveSuccessful = AddCircele(randomColumn, "r");
     } else {
-      moveSuccessful = AddCircele(randomColumn, "y");
+      if (Turn === 0) {
+        moveSuccessful = AddCircele(randomColumn, "r");
+      } else {
+        moveSuccessful = AddCircele(randomColumn, "y");
+      }
     }
     if (moveSuccessful) {
       break;
@@ -408,9 +429,14 @@ function MoveArrow(Line) {
 
 function nextTurn() {
   if (Turn === 0) {
-    Turn = 1;
-    GameTurnUI.style.backgroundImage = "url(assets/Player2-1.svg)";
-    GameTurnText.innerHTML = "PLAYER 2’S TURN";
+    if (CPUmode) {
+      CPU();
+      Turn = 1;
+    } else {
+      Turn = 1;
+      GameTurnUI.style.backgroundImage = "url(assets/Player2-1.svg)";
+      GameTurnText.innerHTML = "PLAYER 2’S TURN";
+    }
   } else {
     Turn = 0;
     GameTurnUI.style.backgroundImage = "url(assets/Player1-1.svg)";
@@ -461,4 +487,64 @@ function createVictoryBanner(PlayerName) {
     startGame();
     Maindiv.remove();
   });
+}
+
+// ######################################################### IA
+
+function CPU() {
+  let move = findBestMove("r") || findBestMove("y");
+  if (move === null) {
+    move = Math.floor(Math.random() * 7);
+  }
+  AddCircele(move, "y");
+}
+
+function findBestMove(player) {
+  let bestScore = 0;
+  let bestColumn = null;
+  for (let col = 0; col < GrideGameGrid.length; col++) {
+    const column = GrideGameGrid[col];
+    if (column[0] !== "") continue;
+    const row = column.lastIndexOf("");
+    if (row === -1) continue;
+    column[row] = player;
+    const score = evaluateMove(col, row, player);
+    column[row] = "";
+    if (score > bestScore) {
+      bestScore = score;
+      bestColumn = col;
+    }
+  }
+  return bestColumn;
+}
+
+function evaluateMove(col, row, player) {
+  let maxCount = 0;
+  const directions = [
+    [0, 1], // vertical
+    [1, 0], // horizontal
+    [1, 1], // diagonal down right
+    [1, -1], // diagonal up right
+  ];
+  for (const [dx, dy] of directions) {
+    let count = 1;
+    for (const sign of [1, -1]) {
+      for (let step = 1; step < 4; step++) {
+        const c = col + dx * step * sign;
+        const r = row + dy * step * sign;
+        if (
+          c < 0 ||
+          c >= GrideGameGrid.length ||
+          r < 0 ||
+          r >= GrideGameGrid[0].length ||
+          GrideGameGrid[c][r] !== player
+        ) {
+          break;
+        }
+        count++;
+      }
+    }
+    maxCount = Math.max(maxCount, count);
+  }
+  return maxCount;
 }
