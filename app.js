@@ -12,13 +12,20 @@ const TimerScreen = document.querySelector(
   ".info > div:nth-child(1) > p:nth-child(2)"
 );
 const GameHUD = document.querySelectorAll(".gamehud > .arrow > button");
-const GameTurnUI = document.querySelector(".info > div:first-child");
-const GameTurnText = document.querySelector(
-  ".info > div:first-child > p:first-child"
-);
+const GameTurnUI = document.getElementById("timerHUD");
+const GameTurnText = document.querySelector(".info > div > p:first-child");
 const UIinfoGame = document.querySelector(".info");
+const GamePlayer1Point = document.querySelector(
+  ".game > div:nth-child(1) > p:last-child"
+);
+const GamePlayer2Point = document.querySelector(
+  ".game > div:nth-child(3) > p:last-child"
+);
+const RestartBTN = document.querySelector("nav > button:nth-child(3)");
+const JvJ = document.querySelector(".GameMenu > div > button:nth-child(1)");
 
 /* Variables du jeu */
+let CanPlay = 1;
 let ScoreJ1 = 0;
 let ScoreJ2 = 0;
 let Colum = 0;
@@ -29,10 +36,6 @@ let PlayersName = "";
 let GrideGameDiv = [];
 let GrideGameGrid = [];
 
-/* Initialisation */
-startGame();
-setupGride();
-
 /* Écouteurs d’événements */
 GameRulesBTN.addEventListener("click", () => {
   CreatRulesAndShowRules();
@@ -40,6 +43,19 @@ GameRulesBTN.addEventListener("click", () => {
 
 navMenu.addEventListener("click", () => {
   CreatPauseUIAndShowPauseUI();
+});
+
+RestartBTN.addEventListener("click", () => {
+
+  startGame();
+  resetGame();
+});
+
+JvJ.addEventListener("click", () => {
+  pupupUI.style.display = "none";
+  GameMenuUI.style.display = "none";
+  startGame();
+  resetGame();
 });
 
 /* Écouteur d’événements pour les touches du clavier */
@@ -62,7 +78,7 @@ document.addEventListener("keydown", (e) => {
       moveSuccessful = AddCircele(Colum, "y");
     }
     if (moveSuccessful) {
-      nextTurn(); // Appel à nextTurn()
+      nextTurn();
       checkWinner(GrideGameGrid);
     }
   }
@@ -168,6 +184,7 @@ function CreatPauseUIAndShowPauseUI() {
 
   RestartBTN.addEventListener("click", () => {
     startGame();
+    resetGame();
     pupupUI.style.display = "none";
     MainDiv.remove();
   });
@@ -194,6 +211,8 @@ function createlement(type, parms, inenrhtml, destination) {
 
 /* Mise en place de la grille de jeu */
 function setupGride() {
+  GrideGameDiv = [];
+  GrideGameGrid = [];
   let space = 0;
   for (let i = 0; i < 6; i++) {
     GrideGameDiv.push([]);
@@ -203,8 +222,14 @@ function setupGride() {
     if (space === 6) {
       space = 0;
     }
-    GrideGameGrid[space].push([]);
+    GrideGameGrid[space].push("");
     GrideGameDiv[space].push(grideDiv[i]);
+    GrideGameDiv[space][GrideGameDiv[space].length - 1].style.backgroundColor =
+      "#7945ff";
+    // Remove any ::before pseudo-element by adding an overriding class.
+    GrideGameDiv[space][GrideGameDiv[space].length - 1].classList.remove(
+      "winner"
+    );
     space++;
   }
 }
@@ -253,21 +278,32 @@ function ShowWinner(list) {
     let y = list[i][1];
     GrideGameDiv[x][y].classList.add("winner");
   }
+  PlayersName = GrideGameGrid[list[0][0]][list[0][1]];
+  createVictoryBanner(PlayersName);
   stopGame();
 }
 
 /* Démarrage du jeu */
 function startGame() {
-  GameTurnUI.style.backgroundImage = "url(assets/Player1-1.svg)";
-  GameTurnText.innerHTML = "PLAYER 1’S TURN";
+  if (document.querySelector(".victory-banner")) {
+    document.querySelector(".victory-banner").remove();
+  }
+  GameTurnUI.style.display = "flex";
+  CanPlay = 1;
+  Turn = 1;
+  nextTurn();
+  Colum = 0;
+  PlayersName = "";
+  setupGride();
+  Timers(15);
+  MoveArrow(Colum);
+}
+
+function resetGame() {
   ScoreJ1 = 0;
   ScoreJ2 = 0;
-  Colum = 0;
-  Turn = 0;
-  Timer = 0;
-  PlayersName = "";
-  GrideGameDiv = [];
-  GrideGameGrid = [];
+  GamePlayer1Point.innerHTML = ScoreJ1;
+  GamePlayer2Point.innerHTML = ScoreJ2;
 }
 
 /* Gestion du temps */
@@ -342,17 +378,19 @@ function AddCircele(List, Player) {
 }
 
 function MoveArrow(Line) {
-  for (let i = 0; i < GameHUD.length; i++) {
-    GameHUD[i].innerHTML = "";
-  }
-  if (Turn == 0) {
-    GameHUD[Line].innerHTML = `<img src="assets/Player1.svg" alt="Box ${
-      Line + 1
-    }" />`;
-  } else {
-    GameHUD[Line].innerHTML = `<img src="assets/Player2.svg" alt="Box ${
-      Line + 1
-    }" />`;
+  if (CanPlay === 1) {
+    for (let i = 0; i < GameHUD.length; i++) {
+      GameHUD[i].innerHTML = "";
+    }
+    if (Turn == 0) {
+      GameHUD[Line].innerHTML = `<img src="assets/Player1.svg" alt="Box ${
+        Line + 1
+      }" />`;
+    } else {
+      GameHUD[Line].innerHTML = `<img src="assets/Player2.svg" alt="Box ${
+        Line + 1
+      }" />`;
+    }
   }
 }
 
@@ -367,15 +405,26 @@ function nextTurn() {
     GameTurnText.innerHTML = "PLAYER 1’S TURN";
   }
   Timers(15);
-  MoveArrow(Colum); // Mettre à jour la couleur de GameHUD
+  MoveArrow(Colum);
 }
 
 function stopGame() {
+  CanPlay = 0;
+  if ((PlayersName = "r")) {
+    ScoreJ1++;
+    GamePlayer1Point.innerHTML = ScoreJ1;
+  } else if ((PlayersName = "y")) {
+    ScoreJ2++;
+    GamePlayer2Point.innerHTML = ScoreJ2;
+  }
   clearInterval(TimerInterval);
 }
 
 function createVictoryBanner(PlayerName) {
-  GameTurnUI.display = "none";
+  GameTurnUI.style.display = "none";
+  if (document.querySelector(".victory-banner")) {
+    document.querySelector(".victory-banner").remove();
+  }
   const Maindiv = createlement(
     "div",
     { class: "victory-banner" },
@@ -383,11 +432,11 @@ function createVictoryBanner(PlayerName) {
     UIinfoGame
   );
   if (PlayerName === "r") {
-    createlement("p", { class: "hl" }, `PLAYER 1 wins!`, Maindiv);
+    createlement("p", { class: "hxs" }, `PLAYER 1`, Maindiv);
   } else if (PlayerName === "y") {
-    createlement("p", { class: "hl" }, `PLAYER 2 wins!`, Maindiv);
+    createlement("p", { class: "hxs" }, `PLAYER 2`, Maindiv);
   }
-  createlement("h2", { class: "hxs" }, "WINS", Maindiv);
+  createlement("h2", { class: "hl" }, "WINS", Maindiv);
 
   const playAgainButton = createlement(
     "button",

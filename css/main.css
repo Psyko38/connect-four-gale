@@ -170,11 +170,12 @@ nav > button {
 	justify-content: center;
 }
 
-.info > div{
+.info > div:first-child{
 	color: var(--White);
 }
 
-.info > div:last-child {
+.victory-banner {
+	color: var(--Black);
 	padding: 5px 35px 5px 35px;
 	background-color: var(--White);
 	border-radius: 20px;
@@ -185,15 +186,15 @@ nav > button {
 	align-items: center;
 }
 
-.info > div:last-child > button {
-	color: white;
+.victory-banner > button {
+	color: var(--White);
 	background: var(--Dark-Purple);
 	border-radius: 666px;
 	border: 0;
 	padding: 10px;
 }
 
-.info > div:last-child > button:hover {
+.victory-banner > button:hover {
 	background: var(--Red);
 }
 
@@ -320,20 +321,18 @@ li::before {
 	width: 100%;
 }
 
-.pause button:nth-child(1) {
-	border: 3px solid #5c2dd5;
-	box-shadow: 0px 10px 0px 0px #5c2dd5;
-}
-
-.pause button:nth-child(2) {
-	border: 3px solid #000000;
-	box-shadow: 0px 10px 0px 0px #000000;
+.pause button {
+	border: 3px solid var(--Black);
+	box-shadow: 0px 10px 0px 0px  var(--Black);
 }
 
 .pause button:nth-child(3) {
 	background: #fd6687;
+}
+
+.pause button:hover{
 	border: 3px solid #5c2dd5;
-	box-shadow: 0px 10px 0px 0px #5c2dd5;
+	box-shadow: 0px 5px 0px 0px #5c2dd5;
 }
 
 .GameMenu {
@@ -364,12 +363,17 @@ li::before {
 	height: 10vmin;
 	margin: 10px 0 10px 0;
 	border-radius: 20px;
+	border: 3px solid var(--Black);
+	box-shadow: 0px 10px 0px 0px  var(--Black);
+}
+
+.GameMenu > .button > button:hover{
+	border: 3px solid #5c2dd5;
+	box-shadow: 0px 10px 0px 0px #5c2dd5;
 }
 
 .GameMenu > .button > button:first-child {
 	background-color: var(--Yellow);
-	border: 3px solid #5c2dd5;
-	box-shadow: 0px 10px 0px 0px #5c2dd5;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -377,18 +381,17 @@ li::before {
 
 .GameMenu > .button > button:last-child {
 	background-color: var(--White);
-	border: 3px solid #5c2dd5;
-	box-shadow: 0px 10px 0px 0px #5c2dd5;
 }
 
 .GameMenu button {
 	width: 100%;
 }
 
+
+
 /* centre de controle des HUD ###################################################  */
 .pupup {
 	background-color: var(--Dark-Purple);
-	display: none;
 }
 
 .rules {
@@ -403,12 +406,8 @@ li::before {
 	display: grid;
 }
 
-.info > div:first-child {
+.info > div {
 	display: flex;
-}
-
-.info > div:last-child {
-	display: none;
 }
 
 .winner::after {
