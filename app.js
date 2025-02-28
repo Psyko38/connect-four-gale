@@ -1,17 +1,25 @@
 /* Sélection des éléments DOM       */
-const GameRulesBTN = document.querySelector(".GameMenu > .button > button:last-child");
+const GameRulesBTN = document.querySelector(
+  ".GameMenu > .button > button:last-child"
+);
 const GameMenuUI = document.querySelector(".GameMenu");
 const pupupUI = document.getElementById("pupup");
 const GameMunuUI = document.getElementById("GameMenu");
 const navMenu = document.querySelector("nav > button:nth-child(1)");
 const grideDiv = document.querySelectorAll(".gride > div");
-const TimerScreen = document.querySelector(".info > div:nth-child(1) > p:nth-child(2)");
+const TimerScreen = document.querySelector(
+  ".info > div:nth-child(1) > p:nth-child(2)"
+);
 const GameHUD = document.querySelectorAll(".gamehud > .arrow > button");
 const GameTurnUI = document.getElementById("timerHUD");
 const GameTurnText = document.querySelector(".info > div > p:first-child");
 const UIinfoGame = document.querySelector(".info");
-const GamePlayer1Point = document.querySelector(".game > div:nth-child(1) > p:last-child");
-const GamePlayer2Point = document.querySelector(".game > div:nth-child(3) > p:last-child");
+const GamePlayer1Point = document.querySelector(
+  ".game > div:nth-child(1) > p:last-child"
+);
+const GamePlayer2Point = document.querySelector(
+  ".game > div:nth-child(3) > p:last-child"
+);
 const RestartBTN = document.querySelector("nav > button:nth-child(3)");
 const JvJ = document.querySelector(".GameMenu > div > button:nth-child(2)");
 const JvC = document.querySelector(".GameMenu > div > button:nth-child(1)");
@@ -61,36 +69,37 @@ JvC.addEventListener("click", () => {
 });
 
 document.addEventListener("keydown", (e) => {
-  if (e.key === "ArrowRight") {
-    if (Colum < 6) {
-      Colum++;
-      MoveArrow(Colum);
-    }
-  } else if (e.key === "ArrowLeft") {
-    if (Colum > 0) {
-      Colum--;
-      MoveArrow(Colum);
-    }
-  } else if (e.key === " ") {
-    let moveSuccessful = false;
-    if (Turn === 0) {
-      moveSuccessful = AddCircele(Colum, "r");
-    } else {
-      moveSuccessful = AddCircele(Colum, "y");
-    }
-    if (moveSuccessful) {
-      if (CPUmode === true) {
-        CPU();
-        Turn = 0;
-        Timers(15);
-      } else {
-        nextTurn();
+  if (CanPlay == 1) {
+    if (e.key === "ArrowRight") {
+      if (Colum < 6) {
+        Colum++;
+        MoveArrow(Colum);
       }
-      checkWinner(GrideGameGrid);
+    } else if (e.key === "ArrowLeft") {
+      if (Colum > 0) {
+        Colum--;
+        MoveArrow(Colum);
+      }
+    } else if (e.key === " ") {
+      let moveSuccessful = false;
+      if (Turn === 0) {
+        moveSuccessful = AddCircele(Colum, "r");
+      } else {
+        moveSuccessful = AddCircele(Colum, "y");
+      }
+      if (moveSuccessful) {
+        if (CPUmode === true) {
+          CPU();
+          Turn = 0;
+          Timers(15);
+        } else {
+          nextTurn();
+        }
+        checkWinner(GrideGameGrid);
+      }
     }
   }
 });
-
 
 /* Fonctions utilitaires            */
 function createlement(type, parms, inenrhtml, destination) {
@@ -113,26 +122,56 @@ function CreatRulesAndShowRules() {
   pupupUI.style.backgroundColor = "var(--Dark-Purple)";
   pupupUI.style.display = "flex";
 
-  const MainDiv = createlement("dialog", { class: "rules", open: "" }, "", pupupUI);
+  const MainDiv = createlement(
+    "dialog",
+    { class: "rules", open: "" },
+    "",
+    pupupUI
+  );
   MainDiv.style.display = "unset";
 
   createlement("h1", { class: "hl" }, "RULES", MainDiv);
 
   const obj = createlement("div", { class: "obj" }, "", MainDiv);
   createlement("h2", { class: "hs" }, "OBJECTIVE", obj);
-  createlement("p", {}, "Be the first player to connect 4 of the same colored discs in a row (either vertically, horizontally, ordiagonally).", obj);
+  createlement(
+    "p",
+    {},
+    "Be the first player to connect 4 of the same colored discs in a row (either vertically, horizontally, ordiagonally).",
+    obj
+  );
 
   const htp = createlement("div", { class: "htp" }, "", MainDiv);
   createlement("h2", { class: "hs" }, "HOW TO PLAY", htp);
 
   const ol = createlement("ol", {}, "", htp);
   createlement("li", {}, "Red goes first in the first game.", ol);
-  createlement("li", {}, "Players must alternate turns, and only one disc canbe dropped in each turn.", ol);
-  createlement("li", {}, "he game ends when there is a 4-in-a-row or astalemate.", ol);
-  createlement("li", {}, "The starter of the previous game goes second on thenext game.", ol);
+  createlement(
+    "li",
+    {},
+    "Players must alternate turns, and only one disc canbe dropped in each turn.",
+    ol
+  );
+  createlement(
+    "li",
+    {},
+    "he game ends when there is a 4-in-a-row or astalemate.",
+    ol
+  );
+  createlement(
+    "li",
+    {},
+    "The starter of the previous game goes second on thenext game.",
+    ol
+  );
 
   const ButtonChekGameRule = createlement("button", {}, "", MainDiv);
-  createlement("img", { src: "../assets/Chek.svg", alt: "ok" }, "", ButtonChekGameRule);
+  createlement(
+    "img",
+    { src: "../assets/Chek.svg", alt: "ok" },
+    "",
+    ButtonChekGameRule
+  );
 
   ButtonChekGameRule.addEventListener("click", () => {
     GameMunuUI.style.display = "grid";
@@ -149,13 +188,23 @@ function CreatPauseUIAndShowPauseUI() {
   pupupUI.style.backgroundColor = "#00000080";
   pupupUI.style.display = "flex";
 
-  const MainDiv = createlement("div", { class: "pause", open: "" }, "", pupupUI);
+  const MainDiv = createlement(
+    "div",
+    { class: "pause", open: "" },
+    "",
+    pupupUI
+  );
   MainDiv.style.display = "unset";
 
   createlement("h2", { class: "hl" }, "PAUSE", MainDiv);
 
   const div = createlement("div", { class: "button" }, "", MainDiv);
-  const ReumeGame = createlement("button", { class: "hm" }, "CONTINUE GAME", div);
+  const ReumeGame = createlement(
+    "button",
+    { class: "hm" },
+    "CONTINUE GAME",
+    div
+  );
   const RestartBTN = createlement("button", { class: "hm" }, "RESTART", div);
   const QuitGame = createlement("button", { class: "hm" }, "QUIT GAME", div);
 
@@ -194,8 +243,11 @@ function setupGride() {
     }
     GrideGameGrid[space].push("");
     GrideGameDiv[space].push(grideDiv[i]);
-    GrideGameDiv[space][GrideGameDiv[space].length - 1].style.backgroundColor = "#7945ff";
-    GrideGameDiv[space][GrideGameDiv[space].length - 1].classList.remove("winner");
+    GrideGameDiv[space][GrideGameDiv[space].length - 1].style.backgroundColor =
+      "#7945ff";
+    GrideGameDiv[space][GrideGameDiv[space].length - 1].classList.remove(
+      "winner"
+    );
     space++;
   }
 }
@@ -301,9 +353,13 @@ function placeRandomPiece() {
 function MoveArrow(Line) {
   if (CanPlay === 1) {
     if (Turn == 0) {
-      GameHUD[Line].innerHTML = `<img src="assets/Player1.svg" alt="Box ${Line + 1}" />`;
+      GameHUD[Line].innerHTML = `<img src="assets/Player1.svg" alt="Box ${
+        Line + 1
+      }" />`;
     } else {
-      GameHUD[Line].innerHTML = `<img src="assets/Player2.svg" alt="Box ${Line + 1}" />`;
+      GameHUD[Line].innerHTML = `<img src="assets/Player2.svg" alt="Box ${
+        Line + 1
+      }" />`;
     }
     for (let i = 0; i < GameHUD.length; i++) {
       if (i !== Line) {
@@ -340,7 +396,7 @@ function checkWinner(grid) {
     [0, 1], // horizontal
     [1, 0], // vertical
     [1, 1], // diagonale Up
-    [-1, 1] // diagonale Down
+    [-1, 1], // diagonale Down
   ];
 
   for (let [d1, d2] of directions) {
@@ -403,7 +459,12 @@ function createVictoryBanner(PlayerName) {
   if (document.querySelector(".victory-banner")) {
     document.querySelector(".victory-banner").remove();
   }
-  const Maindiv = createlement("div", { class: "victory-banner" }, "", UIinfoGame);
+  const Maindiv = createlement(
+    "div",
+    { class: "victory-banner" },
+    "",
+    UIinfoGame
+  );
   if (PlayerName === "r") {
     createlement("p", { class: "hxs" }, "PLAYER 1", Maindiv);
   } else if (PlayerName === "y") {
@@ -411,7 +472,12 @@ function createVictoryBanner(PlayerName) {
   }
   createlement("h2", { class: "hl" }, "WINS", Maindiv);
 
-  const playAgainButton = createlement("button", { class: "hxs" }, "PLAY AGAIN", Maindiv);
+  const playAgainButton = createlement(
+    "button",
+    { class: "hxs" },
+    "PLAY AGAIN",
+    Maindiv
+  );
   playAgainButton.addEventListener("click", () => {
     startGame();
     Maindiv.remove();
@@ -449,10 +515,10 @@ function findBestMove(player) {
 function evaluateMove(col, row, player) {
   let maxCount = 0;
   const directions = [
-    [0, 1],   // vertical
-    [1, 0],   // horizontal
-    [1, 1],   // diagonal down right
-    [1, -1]   // diagonal up right
+    [0, 1], // vertical
+    [1, 0], // horizontal
+    [1, 1], // diagonal down right
+    [1, -1], // diagonal up right
   ];
   for (const [dx, dy] of directions) {
     let count = 1;
@@ -460,7 +526,13 @@ function evaluateMove(col, row, player) {
       for (let step = 1; step < 4; step++) {
         const c = col + dx * step * sign;
         const r = row + dy * step * sign;
-        if (c < 0 || c >= GrideGameGrid.length || r < 0 || r >= GrideGameGrid[0].length || GrideGameGrid[c][r] !== player) {
+        if (
+          c < 0 ||
+          c >= GrideGameGrid.length ||
+          r < 0 ||
+          r >= GrideGameGrid[0].length ||
+          GrideGameGrid[c][r] !== player
+        ) {
           break;
         }
         count++;
